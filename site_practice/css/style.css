@@ -69,7 +69,7 @@ header {
 }
 
 .head-container .head-brand a:hover {
-  color: rgb(33, 32, 31);
+  color: rgb(68, 67, 65);
   cursor: pointer;
 }
 
@@ -98,8 +98,8 @@ section {                        /*기본 설정*/
 .main-container {    /*배경 img를 덮기 위해서*/
   width: 100%;
   height: 100%;
-  background-color: rgb(35, 34, 34);
-  opacity: 0.3;      /*투명도*/
+  background-color: rgb(184, 150, 150);
+  opacity: 0.8;      /*투명도*/
   z-index: 2;
 }
 
@@ -112,15 +112,21 @@ section {                        /*기본 설정*/
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: rgb(255, 255, 255);
   padding-bottom: 0.8rem;
 }
 
 .message {
   font-size: 0.7rem;
   font-weight: normal;
-  color: white;
+  color: rgb(255, 255, 255);
   line-height: 2rem;
+}
+
+.news {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
 }
 
 .skill-container {
@@ -193,17 +199,28 @@ section {                        /*기본 설정*/
   color: #545e6f;
 }
 
-.slide-left {
-  font-size: 2rem;
+.slide-prev {
+  font-size: 1.7rem;
   cursor: pointer;
-  color: #b6c4dd;
+  color: #4a4a54;
 }
 
-.slide-right {
-  font-size: 2rem;
+.slide-next {
+  font-size: 1.7rem;
   cursor: pointer;
-  color: #545e6f;
+  margin-left: 1px;
+  color: #f2f3f5;
 }
+
+.slide-prev-hover:hover {
+  transition: transform 0.4s;
+  transform: translateX(-2px);
+}
+
+.slide-next-hover:hover {
+  transition: transform 0.5s;
+  transform: translateX(3px);
+} 
 
 .arrow-container {
   display: flex;          /*좌우 버튼 가까워짐*/
@@ -214,7 +231,7 @@ section {                        /*기본 설정*/
   list-style: none;
   padding: 1rem 0;
   margin: 0;
-  overflow: hidden;
+  overflow: none;      /*overflow를 hidden으로 설정하면 transform시 이미지 짤림*/
 
 }
 
@@ -262,11 +279,15 @@ section {                        /*기본 설정*/
 .class-desc {
   width: 100;
   margin-top: 0.4rem;
+  color: #696d74;
+}
+
+.class-desc:hover {
+  color: #192a30;
 }
 
 .class-title {
   font-weight: bold;
-  color: #545e6f;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -277,7 +298,6 @@ section {                        /*기본 설정*/
 
 .class-detail {
   font-size: 0.7rem;
-  color: #545e6f;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -301,26 +321,67 @@ footer {
 }
 
 .footer-message{
-  font-weight:;
   font-size: 0.6rem;
   color:#545e6f;
   margin-bottom: 0.5rem;
 }
 
 .footer-contact{
-  font-weight:;
   font-size: 0.6rem;
   color:#545e6f;
   margin-bottom: 0.5rem;
 }
 
 .footer-copyright{
-font-weight:;
   font-size: 0.6rem;
   color:#545e6f;
   margin-bottom: 0.2rem;
 }
 
+#backtotop.show:hover {
+  cursor: pointer;
+  background-color: rgb(141, 140, 140);
+}
+
+
+#backtotop {
+  background-color: rgb(47, 48, 89);
+  width: 40px;
+  height: 40px;
+  text-align:center;
+
+  border-radius: 20px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition-property: background-color, opacity, visibility;
+  transition-duration: 0.3s, 0.5s, 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+
+#backtotop::after {                   /*::after (요소 뒤에 content 추가) 가상 요소에서,*/
+  content: "\f077";                   /*content: "폰트어썸 유니코드"를 넣고*/
+  font-family: FontAwesome;           /*font-family: FontAwesome 이라고 넣으면 됨*/ 
+  font-size: 1.5rem;
+  line-height: 40px;
+  color: white;
+}
+
+#backtotop.show {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgb(63, 88, 104);
+}
+/* drag 할 수 있는 아이템임을 나타내는 표시를 포인터로 변경 */
+ul li img:hover {         /*마우스 올라가 있는 상태 손모양*/
+  cursor: grab;          /*ie11에서 지원x*/
+}
+/* dragging 중인  상태에서 잡는 표시를 포인터로 변경함 */
+ul li img:active {        /*클릭된 상태 잡는 모양*/
+  cursor: grabbing;      /*ie11에서 지원x*/
+}
 
 @media only screen and (min-width: 1200px) {   /*줄렸을때 최소 1200px유지(반응형)*/
   .inner {
@@ -334,5 +395,29 @@ font-weight:;
   }
   .roadmap-desc {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0.8rem;
+  }
+  .message {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #fff;
+    line-height: 2rem;
+  }
+  .class-skill {
+    display: none;
+  }
+  .class-container {
+    padding: 0.5rem;
+  }
+  .class-desc {
+    margin-top: 0rem;
   }
 }
